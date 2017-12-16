@@ -1,17 +1,17 @@
-type capvec = Vec<i32>;
+pub type Capvec = Vec<i32>;
 
 pub fn captcha(input: &str) {
-    let mut worklist = to_vec(input);
+    let worklist = to_vec(input);
     // riddle 1
     let captcha = calculate(worklist.to_vec());
-    println!("and the first captcha is: {:?}\n", captcha);
+    println!("the first captcha is: {:?}\n", captcha);
     // riddle 2
     let captcha = calculate_around(worklist);
     println!("and the second captcha is: {:?}\n", captcha);
 }
 
-fn to_vec(input: &str) -> capvec {
-    let mut output: capvec = Vec::new();
+pub fn to_vec(input: &str) -> Capvec {
+    let mut output: Capvec = Vec::new();
     let mut input = input.to_string();
     while input.len() > 0 {
         let c = input.remove(0).to_string();
@@ -21,7 +21,7 @@ fn to_vec(input: &str) -> capvec {
     output
 }
 
-fn calculate(mut input: capvec) -> i32 {
+fn calculate(mut input: Capvec) -> i32 {
     let mut sum: i32 = 0;
     let mut a = input.pop().unwrap();
     let end = a;
@@ -38,7 +38,7 @@ fn calculate(mut input: capvec) -> i32 {
     sum
 }
 
-fn calculate_around(input: capvec) -> i32 {
+fn calculate_around(input: Capvec) -> i32 {
     let len = input.len();
     let mut counter = 0;
     let mut plushalf = len / 2;
