@@ -2,8 +2,12 @@ type capvec = Vec<i32>;
 
 pub fn captcha(input: &str) {
     let mut worklist = to_vec(input);
-    let captcha = calculate(worklist);
+    // riddle 1
+    let captcha = calculate(worklist.to_vec());
     println!("and the first captcha is: {:?}\n", captcha);
+    // riddle 2
+    let captcha = calculate_around(worklist);
+    println!("and the second captcha is: {:?}\n", captcha);
 }
 
 fn to_vec(input: &str) -> capvec {
@@ -34,9 +38,41 @@ fn calculate(mut input: capvec) -> i32 {
     sum
 }
 
+fn calculate_around(input: capvec) -> i32 {
+    let len = input.len();
+    let mut counter = 0;
+    let mut plushalf = len / 2;
+    let mut sum = 0;
+    while counter < len {
+        if input.get(counter).unwrap() == input.get(plushalf).unwrap() {
+            sum += *input.get(counter).unwrap() as i32;
+        }
+        plushalf += 1;
+        if plushalf == len {
+            plushalf = 0
+        };
+        counter += 1;
+    }
+    sum
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn calculate_halfway_around4() {
+        let vector = to_vec("12131415");
+        let sum = calculate_around(vector);
+        assert_eq!(sum, 4);
+    }
+
+    #[test]
+    fn calculate_halfway_around12() {
+        let vector = to_vec("123123");
+        let sum = calculate_around(vector);
+        assert_eq!(sum, 12);
+    }
 
     #[test]
     fn create_vec() {
@@ -45,21 +81,21 @@ mod tests {
     }
 
     #[test]
-    fn cacluate_the_captcha_case1() {
+    fn cacluate_the_captcha_case9() {
         let vector = to_vec("91212129");
         let sum = calculate(vector);
         assert_eq!(sum, 9);
     }
 
     #[test]
-    fn cacluate_the_captcha_case2() {
+    fn cacluate_the_captcha_case4() {
         let vector = to_vec("1111");
         let sum = calculate(vector);
         assert_eq!(sum, 4);
     }
 
     #[test]
-    fn cacluate_the_captcha_case3() {
+    fn cacluate_the_captcha_case12() {
         let vector = to_vec("9121221129");
         let sum = calculate(vector);
         assert_eq!(sum, 12);
