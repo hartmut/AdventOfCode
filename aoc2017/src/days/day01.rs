@@ -10,7 +10,7 @@ pub fn captcha(input: &str) {
     println!("and the second captcha is: {:?}\n", captcha);
 }
 
-pub fn to_vec(input: &str) -> Capvec {
+fn to_vec(input: &str) -> Capvec {
     let mut output: Capvec = Vec::new();
     let mut input = input.to_string();
     while input.len() > 0 {

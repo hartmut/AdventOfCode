@@ -11,4 +11,7 @@ fn main() {
     let input_day02 = "src/data/inputday02.txt";
     days::day02::checksum(input_day02.to_string());
 
+    // day 3
+    let input_day03: i32 = 368078;
+    days::day03::distance_output(input_day03);
 }

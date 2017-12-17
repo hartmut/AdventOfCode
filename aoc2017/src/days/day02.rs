@@ -3,6 +3,20 @@ use super::day01;
 
 type Minmax = (i32, i32);
 
+pub fn to_vec(input: String) -> day01::Capvec {
+
+    // init
+    let mut output: day01::Capvec = Vec::new();
+    let split = input.split("\t");
+
+    // and now the loop
+    for s in split {
+        let i = s.parse::<i32>().unwrap();
+        output.push(i);
+    }
+    output
+}
+
 pub fn checksum(input: String) {
 
     // init
@@ -29,8 +43,8 @@ pub fn checksum(input: String) {
             None => break,
             Some(x) => line = x,
         }
-        let s_slice: &str = &line[..];
-        let vec = day01::to_vec(s_slice);
+        // let s_slice: &str = &line[..];
+        let vec = to_vec(line);
         sum += even_divisor(vec);
     }
     println!("the checksum for the second day riddle 2 is {:?}\n", sum);
@@ -42,17 +56,34 @@ fn even_divisor(vec: day01::Capvec) -> i32 {
     let len = vec.len();
     let mut outer = 0;
     let mut inner = 1;
+    let mut factorout = 0;
+    let mut multiple = 0;
+    let mut divisor = 0;
 
     // and now loop alot
     while outer < len {
         while inner < len {
-
+            // find divisors
+            let val1 = *vec.get(outer).unwrap() as i32;
+            let val2 = *vec.get(inner).unwrap() as i32;
+            if val1 > val2 {
+                multiple = val1;
+                divisor = val2;
+            } else {
+                multiple = val2;
+                divisor = val1;
+            }
+            if multiple % divisor == 0 {
+                factorout = multiple / divisor
+            };
+            // next step
             inner += 1;
         }
+        // next step
         outer += 1;
+        inner = outer + 1;
     }
-
-    4
+    factorout
 }
 
 fn get_min_max(input: String) -> Minmax {
