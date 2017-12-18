@@ -33,7 +33,7 @@ pub fn checksum(input: String) {
         let (min, max) = get_min_max(line);
         sum = sum + (max - min);
     }
-    println!("the checksum for the second day riddle 1 is {:?}\n", sum);
+    println!("the fist checksum is {:?}", sum);
 
     // loop for riddle 2 day 2
     reader = file::newreader(input.to_string());
@@ -47,7 +47,8 @@ pub fn checksum(input: String) {
         let vec = to_vec(line);
         sum += even_divisor(vec);
     }
-    println!("the checksum for the second day riddle 2 is {:?}\n", sum);
+    println!("the second checksum is {:?}", sum);
+    println!("#######################################################");
 }
 
 fn even_divisor(vec: day01::Capvec) -> i32 {

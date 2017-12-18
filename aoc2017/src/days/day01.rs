@@ -4,10 +4,11 @@ pub fn captcha(input: &str) {
     let worklist = to_vec(input);
     // riddle 1
     let captcha = calculate(worklist.to_vec());
-    println!("the first captcha is: {:?}\n", captcha);
+    println!("the first captcha is: {:?}", captcha);
     // riddle 2
     let captcha = calculate_around(worklist);
-    println!("and the second captcha is: {:?}\n", captcha);
+    println!("and the second captcha is: {:?}", captcha);
+    println!("#######################################################");
 }
 
 fn to_vec(input: &str) -> Capvec {
