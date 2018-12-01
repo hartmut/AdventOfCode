@@ -1,0 +1,7 @@
+target
+*.log
+*.toc
+*.backup
+*.aux
+*.out
+*.lock
