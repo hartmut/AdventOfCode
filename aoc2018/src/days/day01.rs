@@ -118,7 +118,6 @@ mod tests {
     #[test]
     fn test_case_rid2_3() {
         let example: Freqvec = vec![-6, 3, 8, 5, -6];
-        let result = 5;
         assert_eq!(search_double(example), Some(5));
     }
 
