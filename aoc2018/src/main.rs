@@ -31,4 +31,11 @@ fn main() {
     );
     print_separator();
     // day 3
+    let input_file = "data/inputday03.txt";
+    println!("we are on day 3",);
+    println!(
+        "the checksum is {:?}",
+        days::day03::solve_day03_riddle1(input_file.to_string())
+    );
+    print_separator();
 }

@@ -1,5 +1,4 @@
 use std::error::Error;
-/// used mods
 use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufReader;
@@ -58,4 +57,13 @@ pub fn make_stringvec_from_string(riddle_string: String) -> StringVec {
 
 pub fn print_separator() {
     println!("##############################################################################################################");
+}
+
+pub fn match_to_u16(num: String) -> u16 {
+    match num.parse::<u16>() {
+        Ok(x) => x,
+        Err(x) => {
+            panic!("not a number {:?}", x);
+        }
+    }
 }
