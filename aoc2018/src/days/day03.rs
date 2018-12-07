@@ -34,19 +34,12 @@ impl FabricPiece {
         let s = split.next();
         let mut startpos = split.next().unwrap().split(",");
         piece.startx = match startpos.next() {
-            Some(x) => {
-                let mut a = x.chars();
-                let num = a.map(|c| c).collect::<String>();
-                common::match_to_u16(num)
-            }
+            Some(x) => common::match_to_u16(x.to_string()),
             None => panic!("theres something wrong in this element {}", line),
         };
 
-        piece.starty = match startpos.next() {
-            Some(x) => {
-                let num = x.split(":").next().unwrap().to_string();
-                common::match_to_u16(num)
-            }
+        piece.starty = match startpos.next().unwrap().split(":").next() {
+            Some(x) => common::match_to_u16(x.to_string()),
             None => panic!("theres something wrong in this element {}", line),
         };
 
