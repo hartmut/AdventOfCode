@@ -46,7 +46,7 @@ pub fn make_stringvec_from_string(riddle_string: String) -> StringVec {
     let mut result_vec: StringVec = vec![];
 
     for s in split {
-        let without_whitespace = match s.split_whitespace().next() {
+        match s.split_whitespace().next() {
             None => break,
             Some(x) => result_vec.push(x.to_string()),
         };
@@ -61,6 +61,15 @@ pub fn print_separator() {
 
 pub fn match_to_u16(num: String) -> u16 {
     match num.parse::<u16>() {
+        Ok(x) => x,
+        Err(x) => {
+            panic!("not a number {:?}", x);
+        }
+    }
+}
+
+pub fn match_to_usize(num: String) -> usize {
+    match num.parse::<usize>() {
         Ok(x) => x,
         Err(x) => {
             panic!("not a number {:?}", x);
