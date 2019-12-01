@@ -75,7 +75,24 @@ pub fn solve_day03_riddle1(riddlefile: String) -> usize {
     counter
 }
 
+pub fn solve_day03_riddle2(riddlefile: String) -> usize {
+    let riddle_text = common::readfile(riddlefile.to_string());
+    let mut fabric: Fabric = vec![vec![0; LEN]; LEN];
+    fill_fabric_for_riddle2(riddle_text, &mut fabric);
+    2
+}
+
 fn fill_fabric(riddle: String, mut fabric: &mut Fabric) {
+    let lines = riddle.split("\n");
+    for l in lines {
+        match l {
+            "" => break,
+            _ => add_onepiece_to_fabric(FabricPiece::deconstruct(l.to_string()), &mut fabric),
+        }
+    }
+}
+
+fn fill_fabric_for_riddle2(riddle: String, mut fabric: &mut Fabric) {
     let lines = riddle.split("\n");
     for l in lines {
         match l {
