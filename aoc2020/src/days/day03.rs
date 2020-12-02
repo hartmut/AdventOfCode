@@ -9,13 +9,13 @@ struct Passwd {
 }
 pub type PassVec = Vec<Passwd>;
 
-pub fn solve_day02_riddle1(riddlefile: String) -> usize {
+pub fn solve_day03_riddle1(riddlefile: String) -> usize {
     let riddle_text = common::readfile(riddlefile.to_string());
     let mut riddle_vector = make_vec_from_string(riddle_text);
     iterate(&mut riddle_vector)
 }
 
-pub fn solve_day02_riddle2(riddlefile: String) -> usize {
+pub fn solve_day03_riddle2(riddlefile: String) -> usize {
     let riddle_text = common::readfile(riddlefile.to_string());
     let mut riddle_vector = make_vec_from_string(riddle_text);
     iterate2(&mut riddle_vector)

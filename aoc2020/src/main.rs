@@ -10,15 +10,15 @@ fn main() {
     // day 1
     let input_file = "data/inputday01.txt";
     print_day_and_riddle(1, 1);
-    // println!(
-    //     "in the expense report I found the two entries {:?}",
-    //     days::day01::solve_day01_riddle1(input_file.to_string())
-    // );
+    println!(
+        "in the expense report I found the two entries {:?}",
+        days::day01::solve_day01_riddle1(input_file.to_string())
+    );
     print_day_and_riddle(1, 2);
-    // println!(
-    //     "in the expense report I found the two entries {:?}",
-    //     days::day01::solve_day01_riddle2(input_file.to_string())
-    // );
+    println!(
+        "in the expense report I found the two entries {:?}",
+        days::day01::solve_day01_riddle2(input_file.to_string())
+    );
     print_separator();
     let input_file = "data/inputday02.txt";
     print_day_and_riddle(2, 1);
@@ -26,10 +26,22 @@ fn main() {
         "we have {:?} correct passwords",
         days::day02::solve_day02_riddle1(input_file.to_string())
     );
-    // print_day_and_riddle(2, 2);
-    // println!(
-    //     "the nounverb is {:?} ",
-    //     days::day02::solve_day02_riddle2(input_file.to_string())
-    // );
-    // print_separator();
+    print_day_and_riddle(2, 2);
+    println!(
+        "we have {:?} correct passwords using the second method ",
+        days::day02::solve_day02_riddle2(input_file.to_string())
+    );
+    print_separator();
+    let input_file = "data/inputday03.txt";
+    print_day_and_riddle(3, 1);
+    println!(
+        "we have {:?} correct passwords",
+        days::day03::solve_day03_riddle1(input_file.to_string())
+    );
+    print_day_and_riddle(3, 2);
+    println!(
+        "we have {:?} correct passwords using the second method ",
+        days::day03::solve_day03_riddle2(input_file.to_string())
+    );
+    print_separator();
 }
