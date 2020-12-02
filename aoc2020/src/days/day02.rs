@@ -58,8 +58,6 @@ fn iterate2(passwords: &mut PassVec) -> usize {
 
     for line in passwords.iter(){
         let mut count = 0;
-        // into char vector, pop until min position check and then on max pos
-        // subroutine for x pops
         let wordvec: Vec<_> = line.word.chars().collect();
         if wordvec[line.min-1] == line.c {count += 1}
         let wordvec: Vec<_> = line.word.chars().collect();
