@@ -1,5 +1,5 @@
 use super::common;
-use std::collections::HashSet;
+// use std::collections::HashSet;
 pub type ExpenseVec = Vec<i64>;
 
 pub fn solve_day01_riddle1(riddlefile: String) -> i64 {
@@ -38,8 +38,8 @@ fn make_vec_from_string(riddle_string: String) -> ExpenseVec {
 fn calculate(input: ExpenseVec) -> i64 {
     let len: usize = input.len();
     let mut output = 0;
-    'outer: for x in (0..len) {
-        for y in (0..len) {
+    for x in 0..len {
+        for y in 0..len {
             if input[x] + input[y] == 2020 {
                 output = input[x] * input[y] ;
             }
@@ -51,9 +51,9 @@ fn calculate(input: ExpenseVec) -> i64 {
 fn calculate_three(input: ExpenseVec) -> i64 {
     let len: usize = input.len();
     let mut output = 0;
-    'outer: for x in (0..len) {
-        for y in (0..len) {
-            for z in (0..len) {
+    for x in 0..len {
+        for y in 0..len {
+            for z in 0..len {
             if input[x] + input[y] + input[z]== 2020 {
                 output = input[x] * input[y] *input[z];
             }
