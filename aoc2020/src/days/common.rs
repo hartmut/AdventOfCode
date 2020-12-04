@@ -1,4 +1,3 @@
-use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufReader;
@@ -9,7 +8,7 @@ type StringVec = Vec<String>;
 pub fn newreader(filename: String) -> BufReader<File> {
     let path = Path::new(&filename);
     let f = match File::open(&path) {
-        Err(why) => panic!("couldn't open {}: {}", path.display(), why.description()),
+        Err(why) => panic!("couldn't open {}", path.display()),
         Ok(file) => file,
     };
     BufReader::new(f)

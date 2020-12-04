@@ -1,71 +1,95 @@
 use super::common;
-
-#[derive(Debug)]
-struct Passwd {
-    min: usize,
-    max: usize,
-    c: char,
-    word: String,
-}
-pub type PassVec = Vec<Passwd>;
+type Biome = Vec<Vec<u8>>;
 
 pub fn solve_day03_riddle1(riddlefile: String) -> usize {
     let riddle_text = common::readfile(riddlefile.to_string());
-    let mut riddle_vector = make_vec_from_string(riddle_text);
-    iterate(&mut riddle_vector)
+    let biome = make_biome_from_string(riddle_text);
+    iterate(biome, 3 ,1)
 }
 
 pub fn solve_day03_riddle2(riddlefile: String) -> usize {
-    let riddle_text = common::readfile(riddlefile.to_string());
-    let mut riddle_vector = make_vec_from_string(riddle_text);
-    iterate2(&mut riddle_vector)
+    iterate2(riddlefile)
 }
 
-fn make_vec_from_string(riddle_string: String) -> PassVec {
-    let mut lines = riddle_string.lines();
-    let mut result_vec: PassVec = vec![];
+fn make_biome_from_string(riddle_string: String) -> Biome {
+    let mut result_vec: Biome = vec![vec![]];
+    let mut split = riddle_string.chars();
+    let mut line = 0;
 
-    for s in lines {
-        let mut v: Vec<&str> = s.split(' ').collect();
-        let passwd = v.pop().unwrap().to_string();
-        let character = v.pop().unwrap().split(":").next().unwrap().chars().next().unwrap();
-        let mut counter_iter = v.pop().unwrap().split("-");
-        let pass_struct = Passwd{
-            min: counter_iter.next().unwrap().parse::<usize>().unwrap(),
-            max: counter_iter.next().unwrap().parse::<usize>().unwrap(),
-            c: character,
-            word: passwd,
-        };
-        result_vec.push(pass_struct);
+    for c in split {
+        match c {
+            // newline => line += 1,
+            '\n' => {line += 1; result_vec.push(vec![]);},
+            '#' => result_vec[line].push(1),
+            '.' => result_vec[line].push(0),
+            _ => println!("{:?}", c),
+        }
     }
+    let _ = result_vec.pop();
     result_vec
 }
 
-fn iterate(passwords: &mut PassVec) -> usize {
-    let mut correct = 0;
+fn iterate(biome: Biome, right: usize, down: usize) -> usize {
+    let width = biome[0].len();
+    let mut line = 0;
+    let mut column = 0;
+    let mut counter = 0;
 
-    for line in passwords.iter(){
-        let count =  line.word.matches(line.c).count();
-        // println!("{:?}{:?} in {:?}", count, line.c, line.word);
-        if count >= line.min && count <= line.max {correct += 1};
+    while line < biome.len() {
+        counter += usize::from(biome[line][column]);
+        line += down;
+        column = (column + right) % width;
     }
-
-    correct
+    counter
 }
 
-fn iterate2(passwords: &mut PassVec) -> usize {
-    let mut correct = 0;
+fn iterate2a(riddlefile: String, right: usize, down: usize) -> usize {
+    let riddle_text = common::readfile(riddlefile.to_string());
+    let biome = make_biome_from_string(riddle_text);
+    iterate(biome, right, down)
+}
 
-    for line in passwords.iter(){
-        let mut count = 0;
-        // into char vector, pop until min position check and then on max pos
-        // subroutine for x pops
-        let wordvec: Vec<_> = line.word.chars().collect();
-        if wordvec[line.min-1] == line.c {count += 1}
-        let wordvec: Vec<_> = line.word.chars().collect();
-        if wordvec[line.max-1] == line.c {count += 1}
-        if count == 1 {correct += 1}
+fn iterate2(riddlefile: String) -> usize {
+    let mut counter = iterate2a(riddlefile.clone(), 1,1);
+    counter *= iterate2a(riddlefile.clone(), 3,1);
+    counter *= iterate2a(riddlefile.clone(), 5,1);
+    counter *= iterate2a(riddlefile.clone(), 7,1);
+    counter *= iterate2a(riddlefile, 1,2);
+    counter
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn testdata() -> Biome {
+        let riddle_text = common::readfile("data/inputday3-test.txt".to_string());
+        make_biome_from_string(riddle_text)
     }
 
-    correct
+    #[test]
+    fn count_trees_3_1() {
+        let biome = testdata();
+        assert_eq!(iterate(biome, 3, 1), 7);
+    }
+
+    #[test]
+    fn count_trees_1_1() {
+        let biome = testdata();
+        assert_eq!(iterate(biome, 1, 1), 2);
+    }
+
+    #[test]
+    fn count_trees_5_1() {
+        let biome = testdata();
+        assert_eq!(iterate(biome, 5, 1), 3);
+    }
+
+    #[test]
+    fn count_trees_the_second_way() {
+        let biome = testdata();
+        assert_eq!(iterate2("data/inputday3-test.txt".to_string()), 336);
+    }
+
 }
