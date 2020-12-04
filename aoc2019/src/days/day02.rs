@@ -8,24 +8,24 @@ pub fn solve_day02_riddle1(riddlefile: String) -> usize {
     iterate(&mut riddle_vector)
 }
 
-pub fn solve_day02_riddle2(riddlefile: String) -> usize {
-    let riddle_text = common::readfile(riddlefile.to_string());
-    let riddle_vector = make_vec_from_string(riddle_text);
-    let mut output = 0;
-    for x in 1..98 {
-        for y in 1..98 {
-            let mut riddle_clone = riddle_vector.clone();
-            riddle_clone[1] = x;
-            riddle_clone[2] = y;
-            iterate(&mut riddle_clone);
-            if riddle_clone[0] == 19690720 {
-                output = (x * 100) + y;
-                break;
-            }
-        }
-    }
-    output
-}
+// pub fn solve_day02_riddle2(riddlefile: String) -> usize {
+//     let riddle_text = common::readfile(riddlefile.to_string());
+//     let riddle_vector = make_vec_from_string(riddle_text);
+//     let mut output = 0;
+//     for x in 1..98 {
+//         for y in 1..98 {
+//             let mut riddle_clone = riddle_vector.clone();
+//             riddle_clone[1] = x;
+//             riddle_clone[2] = y;
+//             iterate(&mut riddle_clone);
+//             if riddle_clone[0] == 19690720 {
+//                 output = (x * 100) + y;
+//                 break;
+//             }
+//         }
+//     }
+//     output
+// }
 
 fn make_vec_from_string(riddle_string: String) -> OpcodeVec {
     let split = riddle_string.split(",");
