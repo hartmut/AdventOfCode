@@ -4,7 +4,7 @@ type Biome = Vec<Vec<u8>>;
 pub fn solve_day03_riddle1(riddlefile: String) -> usize {
     let riddle_text = common::readfile(riddlefile.to_string());
     let biome = make_biome_from_string(riddle_text);
-    iterate(biome, 3 ,1)
+    iterate(biome, 3, 1)
 }
 
 pub fn solve_day03_riddle2(riddlefile: String) -> usize {
@@ -18,8 +18,10 @@ fn make_biome_from_string(riddle_string: String) -> Biome {
 
     for c in split {
         match c {
-            // newline => line += 1,
-            '\n' => {line += 1; result_vec.push(vec![]);},
+            '\n' => {
+                line += 1;
+                result_vec.push(vec![]);
+            }
             '#' => result_vec[line].push(1),
             '.' => result_vec[line].push(0),
             _ => println!("{:?}", c),
@@ -50,14 +52,13 @@ fn iterate2a(riddlefile: String, right: usize, down: usize) -> usize {
 }
 
 fn iterate2(riddlefile: String) -> usize {
-    let mut counter = iterate2a(riddlefile.clone(), 1,1);
-    counter *= iterate2a(riddlefile.clone(), 3,1);
-    counter *= iterate2a(riddlefile.clone(), 5,1);
-    counter *= iterate2a(riddlefile.clone(), 7,1);
-    counter *= iterate2a(riddlefile, 1,2);
+    let mut counter = iterate2a(riddlefile.clone(), 1, 1);
+    counter *= iterate2a(riddlefile.clone(), 3, 1);
+    counter *= iterate2a(riddlefile.clone(), 5, 1);
+    counter *= iterate2a(riddlefile.clone(), 7, 1);
+    counter *= iterate2a(riddlefile, 1, 2);
     counter
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -91,5 +92,4 @@ mod tests {
         let biome = testdata();
         assert_eq!(iterate2("data/inputday3-test.txt".to_string()), 336);
     }
-
 }

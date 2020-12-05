@@ -35,27 +35,27 @@ fn main() {
     print_separator();
     // day 3
     let input_file = "data/inputday03.txt";
-    print_day_and_riddle(3, 1);
-    println!(
-        "we would hit {:?} trees",
-        days::day03::solve_day03_riddle1(input_file.to_string())
-    );
-    print_day_and_riddle(3, 2);
-    println!(
-        "{:?} trees I would hit? thats a lot ",
-        days::day03::solve_day03_riddle2(input_file.to_string())
-    );
-    print_separator();
+    // print_day_and_riddle(3, 1);
+    // println!(
+    //     "we would hit {:?} trees",
+    //     days::day03::solve_day03_riddle1(input_file.to_string())
+    // );
+    // print_day_and_riddle(3, 2);
+    // println!(
+    //     "{:?} trees I would hit? thats a lot ",
+    //     days::day03::solve_day03_riddle2(input_file.to_string())
+    // );
+    // print_separator();
     // day 4
     let input_file = "data/inputday04.txt";
     print_day_and_riddle(4, 1);
     println!(
-        "we would hit {:?} trees",
+        "we do have {:?} correct passports",
         days::day04::solve_day04_riddle1(input_file.to_string())
     );
     print_day_and_riddle(4, 2);
     println!(
-        "{:?} trees I would hit? thats a lot ",
+        "we do have {:?} checked passports",
         days::day04::solve_day04_riddle2(input_file.to_string())
     );
     print_separator();
