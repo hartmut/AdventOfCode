@@ -13,7 +13,7 @@ pub fn solve_day03_riddle2(riddlefile: String) -> usize {
 
 fn make_biome_from_string(riddle_string: String) -> Biome {
     let mut result_vec: Biome = vec![vec![]];
-    let mut split = riddle_string.chars();
+    let split = riddle_string.chars();
     let mut line = 0;
 
     for c in split {
@@ -89,7 +89,6 @@ mod tests {
 
     #[test]
     fn count_trees_the_second_way() {
-        let biome = testdata();
         assert_eq!(iterate2("data/inputday3-test.txt".to_string()), 336);
     }
 }

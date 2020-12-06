@@ -7,7 +7,7 @@ struct Passwd {
     c: char,
     word: String,
 }
-pub type PassVec = Vec<Passwd>;
+type PassVec = Vec<Passwd>;
 
 pub fn solve_day02_riddle1(riddlefile: String) -> usize {
     let riddle_text = common::readfile(riddlefile.to_string());
@@ -22,7 +22,7 @@ pub fn solve_day02_riddle2(riddlefile: String) -> usize {
 }
 
 fn make_vec_from_string(riddle_string: String) -> PassVec {
-    let mut lines = riddle_string.lines();
+    let lines = riddle_string.lines();
     let mut result_vec: PassVec = vec![];
 
     for s in lines {

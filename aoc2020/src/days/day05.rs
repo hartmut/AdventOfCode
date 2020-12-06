@@ -13,12 +13,12 @@ struct Passport {
 }
 type PassportVec = Vec<Passport>;
 
-pub fn solve_day04_riddle1(riddlefile: String) -> usize {
+pub fn solve_day05_riddle1(riddlefile: String) -> usize {
     let riddle_text = common::readfile(riddlefile.to_string());
     iterate(&mut make_passportvec_from_string(riddle_text))
 }
 
-pub fn solve_day04_riddle2(riddlefile: String) -> usize {
+pub fn solve_day05_riddle2(riddlefile: String) -> usize {
     let riddle_text = common::readfile(riddlefile.to_string());
     iterate2(&mut make_passportvec_from_string(riddle_text))
 }
