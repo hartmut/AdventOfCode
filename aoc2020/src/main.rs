@@ -4,7 +4,7 @@ use days::common::print_day_and_riddle;
 use days::common::print_separator;
 
 fn main() {
-    println!("Hi, going to the caribian this year. You will find the story in this notebook https://adventofcode.com/2020/");
+    println!("Hi, we will be going to the caribians this year and the story of the travel will be documented in this notebook https://adventofcode.com/2020/");
     print_separator();
 
     // day 1
@@ -76,13 +76,13 @@ fn main() {
     let input_file = "data/inputday05.txt";
     print_day_and_riddle(6, 1);
     println!(
-        "the highst id on the boarding pass is {:?}.",
+        "the sum is {:?}.",
         days::day06::solve_riddle1(input_file.to_string())
     );
     print_day_and_riddle(6, 2);
-    println!(
-        "my seat is {:?}",
-        days::day06::solve_riddle2(input_file.to_string())
-    );
+    // println!(
+    //     "my seat is {:?}",
+    //     days::day06::solve_riddle2(input_file.to_string())
+    // );
     print_separator();
 }

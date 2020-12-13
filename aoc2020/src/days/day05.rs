@@ -45,12 +45,12 @@ fn get_seatno(seat: OneSeat) -> usize {
     let mut rowhalf = 64;
     let mut colhalf = 4;
     let mut rowmin = 0;
-    let mut rowmax = 127;
+    let mut _rowmax = 127;
     let mut colmin = 0;
-    let mut colmax = 7;
+    let mut _colmax = 7;
     for i in 0..7 {
         match seat[i] {
-            SeatSearch::Front => rowmax -= rowhalf, // I don't think i need this line
+            SeatSearch::Front => _rowmax -= rowhalf, // I don't think i need this line
             SeatSearch::Back => rowmin += rowhalf,
             _ => {},
         }
@@ -58,7 +58,7 @@ fn get_seatno(seat: OneSeat) -> usize {
     }
     for i in 0..3 {
         match seat[7+i] {
-            SeatSearch::Left => colmax -= colhalf, // I don't think i need this line
+            SeatSearch::Left => _colmax -= colhalf, // I don't think i need this line
             SeatSearch::Right => colmin += colhalf,
             _ => {},
         }
