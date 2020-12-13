@@ -25,10 +25,9 @@ pub fn solve_day04_riddle2(riddlefile: String) -> usize {
 
 fn make_passportvec_from_string(riddle_string: String) -> PassportVec {
     let mut passportvec: PassportVec = vec![];
-    let lines = riddle_string.lines();
     let mut passport = init_passport();
 
-    for s in lines {
+    for s in riddle_string.lines() {
         match s {
             "" => {
                 passportvec.push(passport);

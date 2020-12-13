@@ -63,13 +63,26 @@ fn main() {
     let input_file = "data/inputday05.txt";
     print_day_and_riddle(5, 1);
     println!(
-        "we do have {:?} correct passports",
+        "the highst id on the boarding pass is {:?}.",
         days::day05::solve_day05_riddle1(input_file.to_string())
     );
     print_day_and_riddle(5, 2);
     println!(
-        "we do have {:?} checked passports",
+        "my seat is {:?}",
         days::day05::solve_day05_riddle2(input_file.to_string())
+    );
+    print_separator();
+    // day 6
+    let input_file = "data/inputday05.txt";
+    print_day_and_riddle(6, 1);
+    println!(
+        "the highst id on the boarding pass is {:?}.",
+        days::day06::solve_riddle1(input_file.to_string())
+    );
+    print_day_and_riddle(6, 2);
+    println!(
+        "my seat is {:?}",
+        days::day06::solve_riddle2(input_file.to_string())
     );
     print_separator();
 }

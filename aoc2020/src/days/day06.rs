@@ -11,12 +11,12 @@ enum SeatSearch {
 type OneSeat = [SeatSearch; 10];
 type SeatVec = Vec<OneSeat>;
 
-pub fn solve_day05_riddle1(riddlefile: String) -> usize {
+pub fn solve_riddle1(riddlefile: String) -> usize {
     let riddle_text = common::readfile(riddlefile.to_string());
     iterate(&mut make_seatvec_from_string(riddle_text))
 }
 
-pub fn solve_day05_riddle2(riddlefile: String) -> usize {
+pub fn solve_riddle2(riddlefile: String) -> usize {
     let riddle_text = common::readfile(riddlefile.to_string());
     iterate2(&mut make_seatvec_from_string(riddle_text))
 }
