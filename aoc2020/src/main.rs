@@ -73,16 +73,29 @@ fn main() {
     );
     print_separator();
     // day 6
-    let input_file = "data/inputday05.txt";
+    let input_file = "data/inputday06.txt";
     print_day_and_riddle(6, 1);
     println!(
         "the sum is {:?}.",
         days::day06::solve_riddle1(input_file.to_string())
     );
     print_day_and_riddle(6, 2);
-    // println!(
-    //     "my seat is {:?}",
-    //     days::day06::solve_riddle2(input_file.to_string())
-    // );
+    println!(
+        "my second sum is {:?}",
+        days::day06::solve_riddle2(input_file.to_string())
+    );
+    print_separator();
+    // day 7
+    let input_file = "data/inputday07.txt";
+    print_day_and_riddle(7, 1);
+    println!(
+        "the sum is {:?}.",
+        days::day07::solve_riddle1(input_file.to_string())
+    );
+    print_day_and_riddle(7, 2);
+    println!(
+        "my second sum is {:?}",
+        days::day07::solve_riddle2(input_file.to_string())
+    );
     print_separator();
 }
