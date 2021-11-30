@@ -1,7 +1,7 @@
 mod days;
 
-use days::common::print_day_and_riddle;
-use days::common::print_separator;
+use crate::days::common::print_day_and_riddle;
+use crate::days::common::print_separator;
 
 fn main() {
     println!("Hi, we will be going to the caribians this year and the story of the travel will be documented in this notebook https://adventofcode.com/2020/");
