@@ -19,5 +19,17 @@ fn main() {
         days::day01::Solve::riddle2(input_file.to_string())
     );
     print_separator();
-   
+    // day 2
+    let input_file = "data/inputday02.txt";
+    print_day_and_riddle(2, 1);
+    println!(
+        "so where are we? {:?}",
+        days::day02::Solve::riddle1(input_file.to_string())
+    );
+    print_day_and_riddle(2, 2);
+    println!(
+    "my aim seems slightly off {:?}",
+    days::day02::Solve::riddle2(input_file.to_string())
+    );
+    print_separator();
 }

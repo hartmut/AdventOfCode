@@ -1,3 +1,4 @@
+use csv::{ReaderBuilder, StringRecord, Trim};
 use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufReader;
@@ -28,4 +29,32 @@ pub fn print_separator() {
 
 pub fn print_day_and_riddle(day: u32, riddle: u32) {
     println!("we are on day {} and this is riddle {}", day, riddle);
+}
+
+/*******************/
+/* csv reader part */
+/*******************/
+
+pub fn csvreader(content: &str) -> Vec<StringRecord> {
+    // create csv reader to interpret input string
+    let mut rdr = ReaderBuilder::new()
+        .trim(Trim::All)
+        .has_headers(false)
+        .delimiter(b' ')
+        .from_reader(content.as_bytes());
+
+    // extract list of lines/records
+    rdr.records()
+        .collect::<Result<Vec<StringRecord>, csv::Error>>()
+        .unwrap()
+}
+
+
+pub fn match_to_usize(num: String) -> usize {
+    match num.parse::<usize>() {
+        Ok(x) => x,
+        Err(x) => {
+            panic!("not a number {:?}", x);
+        }
+    }
 }
