@@ -19,6 +19,7 @@ fn main() {
         days::day01::Solve::riddle2(input_file.to_string())
     );
     print_separator();
+
     // day 2
     let input_file = "data/inputday02.txt";
     print_day_and_riddle(2, 1);
@@ -28,8 +29,22 @@ fn main() {
     );
     print_day_and_riddle(2, 2);
     println!(
-    "my aim seems slightly off {:?}",
-    days::day02::Solve::riddle2(input_file.to_string())
+        "my aim seems slightly off {:?}",
+        days::day02::Solve::riddle2(input_file.to_string())
+    );
+    print_separator();
+
+    // day 3
+    let input_file = "data/inputday03.txt";
+    print_day_and_riddle(3, 1);
+    println!(
+        "what power consumption do we have? {:?}",
+        days::day03::Solve::riddle1(input_file.to_string())
+    );
+    print_day_and_riddle(3, 2);
+    println!(
+        "my life support rating currently is {:?}",
+        days::day03::Solve::riddle2(input_file.to_string())
     );
     print_separator();
 }

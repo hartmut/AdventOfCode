@@ -17,10 +17,9 @@ impl Solve {
     }
 }
 fn make_vec_from_string(riddle_string: String) -> DepthVec {
-    let split = riddle_string.split("\n");
     let mut result_vec: DepthVec = vec![];
 
-    for s in split {
+    for s in riddle_string.lines() {
         let without_whitespace = match s.split_whitespace().next() {
             None => break,
             Some(x) => match x.parse::<i64>() {
