@@ -47,4 +47,18 @@ fn main() {
         days::day03::Solve::riddle2(input_file.to_string())
     );
     print_separator();
+
+     // day 4
+     let input_file = "data/inputday04.txt";
+     print_day_and_riddle(4, 1);
+     println!(
+         "what power consumption do we have? {:?}",
+         days::day04::Solve::riddle1(input_file.to_string())
+     );
+    //  print_day_and_riddle(4, 2);
+    //  println!(
+    //      "my life support rating currently is {:?}",
+    //      days::day04::Solve::riddle2(input_file.to_string())
+    //  );
+     print_separator();
 }
