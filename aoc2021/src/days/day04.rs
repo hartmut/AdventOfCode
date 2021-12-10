@@ -21,6 +21,7 @@ impl Solve {
 
 type Board = [[usize; 5]; 5];
 
+// second Vec like Board with enum marked/unmarked
 struct Data {
     draws: Vec<usize>,
     boards: Vec<Board>,
@@ -32,7 +33,7 @@ fn create_draws_list(input: String) -> Vec<usize> {
 }
 
 fn make_vec_from_string(riddle_string: String) -> Data {
-    let mut boards: vec![];
+    let mut boards = vec![[[0;5];5]];
 
     let mut iter = riddle_string.lines();
 
@@ -43,6 +44,9 @@ fn make_vec_from_string(riddle_string: String) -> Data {
     // COMEBACK import data
     // and now read the boards
     for s in riddle_string.lines() {}
+
+    // clean up and create marked/unmarked Boards 
+    boards.swap_remove(0);
 
     // output
     Data { draws, boards }
