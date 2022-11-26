@@ -26,10 +26,10 @@ fn main() {
         "at position 0 we got a {:?} ",
         days::day02::solve_day02_riddle1(input_file.to_string())
     );
-    print_day_and_riddle(2, 2);
-    println!(
-        "the nounverb is {:?} ",
-        days::day02::solve_day02_riddle2(input_file.to_string())
-    );
+    // print_day_and_riddle(2, 2);
+    // println!(
+    //     "the nounverb is {:?} ",
+    //     days::day02::solve_day02_riddle2(input_file.to_string())
+    // );
     print_separator();
 }
