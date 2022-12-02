@@ -4,6 +4,7 @@ use std::io::prelude::*;
 use std::io::BufReader;
 use std::path::Path;
 
+
 pub fn newreader(filename: String) -> BufReader<File> {
     let path = Path::new(&filename);
     let f = match File::open(&path) {
@@ -35,6 +36,7 @@ pub fn print_day_and_riddle(day: u32, riddle: u32) {
 /* csv reader part */
 /*******************/
 
+#[allow(dead_code)]
 pub fn csvreader(content: &str) -> Vec<StringRecord> {
     // create csv reader to interpret input string
     let mut rdr = ReaderBuilder::new()
@@ -49,9 +51,19 @@ pub fn csvreader(content: &str) -> Vec<StringRecord> {
         .unwrap()
 }
 
-
+#[allow(dead_code)]
 pub fn match_to_usize(num: String) -> usize {
     match num.parse::<usize>() {
+        Ok(x) => x,
+        Err(x) => {
+            panic!("not a number {:?}", x);
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub fn match_to_i64(num: String) -> i64 {
+    match num.parse::<i64>() {
         Ok(x) => x,
         Err(x) => {
             panic!("not a number {:?}", x);

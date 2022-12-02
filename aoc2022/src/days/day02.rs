@@ -10,11 +10,11 @@ impl Solve {
         calculate(&mut riddle_vector)
     }
 
-    pub fn riddle2(riddlefile: String) -> i64 {
-        let riddle_text = common::readfile(riddlefile.to_string());
-        let mut riddle_vector = make_vec_from_string(riddle_text);
-        calculate_top_three(&mut riddle_vector)
-    }
+    // pub fn riddle2(riddlefile: String) -> i64 {
+    //     let riddle_text = common::readfile(riddlefile.to_string());
+    //     let mut riddle_vector = make_vec_from_string(riddle_text);
+    //     calculate_top_three(&mut riddle_vector)
+    // }
 }
 fn make_vec_from_string(riddle_string: String) -> FoodVec {
     let mut result_vec: FoodVec = vec![];
@@ -56,6 +56,7 @@ fn calculate(input: &mut FoodVec) -> i64 {
     maxfood
 }
 
+#[allow(dead_code)]
 fn calculate_top_three(input: &mut FoodVec) -> i64 {
     let mut maxfood= vec![0 as i64,0 as i64,0 as i64];
     let mut foodelf=0;
@@ -86,10 +87,10 @@ fn riddle1() {
     assert_eq!(output, 24000);
 }
 
-#[test]
-fn riddle2() {
-    let riddle_text = common::readfile("data/inputday01-testdata.txt".to_string());
-    let mut riddle_vector = make_vec_from_string(riddle_text);
-    let output = calculate_top_three(&mut riddle_vector);
-    assert_eq!(output, 45000);
-}
+// #[test]
+// fn riddle2() {
+//     let riddle_text = common::readfile("data/inputday01-testdata.txt".to_string());
+//     let mut riddle_vector = make_vec_from_string(riddle_text);
+//     let output = calculate_top_three(&mut riddle_vector);
+//     assert_eq!(output, 45000);
+// }

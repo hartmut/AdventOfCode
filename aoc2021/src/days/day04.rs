@@ -1,21 +1,13 @@
-use std::collections::btree_map::IntoIter;
-
-use serde::de::value::UsizeDeserializer;
-
 use crate::days::common::match_to_usize;
 
 use super::common;
-
-type BinVec = Vec<Vec<usize>>;
-
 pub struct Solve;
 
 impl Solve {
     pub fn riddle1(riddlefile: String) -> usize {
         let riddle_text = common::readfile(riddlefile.to_string());
-        let riddle_vector = init_boards(riddle_text);
-        // calculate(riddle_vector)
-        0
+        let mut riddle_vector = init_boards(riddle_text);
+        calculate(&mut riddle_vector)
     }
 
     // pub fn riddle2(riddlefile: String) -> usize {
@@ -25,14 +17,14 @@ impl Solve {
     // }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Board {
     numbers: [[usize; 5]; 5],
     marks: [[bool; 5]; 5],
 }
 
 // second Vec like Board with enum marked/unmarked
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Data {
     draws: Vec<usize>,
     boards: Vec<Board>,
@@ -40,7 +32,7 @@ struct Data {
 
 fn create_draws_list(input: String) -> Vec<usize> {
     let mut draws: Vec<usize> = vec![];
-    let mut splitdraws = input.split(',');
+    let splitdraws = input.split(',');
     for n in splitdraws {
         draws.push(match_to_usize(n.to_string()));
     }
@@ -56,7 +48,7 @@ fn init_a_board() -> Board {
 
 fn init_boards(riddle_string: String) -> Data {
     // init
-    let boards = vec![];
+    let mut boards = vec![];
 
     // get line iterator
     let mut iter = riddle_string.lines();
@@ -72,35 +64,67 @@ fn init_boards(riddle_string: String) -> Data {
     let mut board = init_a_board();
 
     for s in iter {
-        println!("{:?}", s);
         if s.len() == 0 {
-            // reset board
-            println!("empty");
             // insert board into output vector
-            let mut board = init_a_board();
+            boards.push(board.clone());
+            // reset board
+            board = init_a_board();
             y = 0;
         } else {
             // when there is data, import this into the board
-            let mut split = s.split(' ');
+            let split = s.split(' ');
             let mut x = 0;
-            // TODO don't split at space but after three characters
             for n in split {
-                // COMEBACK import data
-                board.numbers[y][x] = match_to_usize(n.to_string());
-                x += 1;
+                // if there is a one digit number we get an entry with no value because of two spaces as separators
+                if n.len() > 0 {
+                    board.numbers[y][x] = match_to_usize(n.to_string());
+                    x += 1;
+                };
             }
             y += 1;
-        };
+        }
     }
-
+    boards.push(board.clone());
+    println!("{:?}", boards);
+    println!("{:?}", draws);
     // output
     Data { draws, boards }
+}
+
+fn update_all_boards(boards: &mut Vec<Board>, value: usize) {
+// COMEBACK update all boards
+}
+
+fn calculate(data: &mut Data) -> usize {
+    let mut iter = data.draws.iter();
+    let mut done = false;
+    let mut value: usize = 0;
+    let mut bingo_board = -1;
+
+    while !done {
+        let draw = iter.next();
+        match draw {
+            None => {
+                done = true;
+                break;
+            }
+            Some(value) => {
+                // iterate over all boards
+                update_all_boards(&mut data.boards, *value);
+                // check whether one board has a bingo
+                // break if yes and communicate bingo board number 
+            },
+        }
+    }
+    // calculate value for bingo Board using variable bingo_board
+
+    0
 }
 
 #[test]
 fn riddle1() {
     let riddle_text = common::readfile("data/inputday04-test.txt".to_string());
-    let riddle_vector = init_boards(riddle_text);
+    let _riddle_vector = init_boards(riddle_text);
     // let output = calculate(riddle_vector);
     // assert_eq!(output, 198);
 }
@@ -108,7 +132,7 @@ fn riddle1() {
 #[test]
 fn riddle2() {
     let riddle_text = common::readfile("data/inputday04-test.txt".to_string());
-    let riddle_vector = init_boards(riddle_text);
+    let _riddle_vector = init_boards(riddle_text);
     // let output = calculate_gases(riddle_vector);
     // assert_eq!(output, 230);
 }
