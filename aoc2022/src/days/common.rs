@@ -70,3 +70,12 @@ pub fn match_to_i64(num: String) -> i64 {
         }
     }
 }
+
+#[allow(dead_code)]
+pub fn charvec_to_digit(charvec: Vec<char>) -> Vec<i64> {
+    let mut outvec: Vec<i64> = vec![];
+    for i in charvec.iter() {
+        outvec.push(*i as i64);
+    };
+    outvec
+}

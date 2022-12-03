@@ -75,7 +75,7 @@ fn calculate_top_three(input: &mut FoodVec) -> i64 {
             }
         };
     }
-    maxfood[0]+maxfood[1]+maxfood[2]
+    maxfood.iter().sum()
 }
 
 #[test]

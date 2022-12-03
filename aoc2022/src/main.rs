@@ -33,4 +33,18 @@ fn main() {
         days::day02::Solve::riddle2(input_file.to_string())
     );
     print_separator();
+
+    // day 3
+    let input_file = "data/inputday03.txt";
+    print_day_and_riddle(3, 1);
+    println!(
+        "What is the sum of the priorities of the item types? {:?}",
+        days::day03::Solve::riddle1(input_file.to_string())
+    );
+    print_day_and_riddle(3, 1);
+    println!(
+        "What is the sum of the priorities of the searched badge item types? {:?}",
+        days::day03::Solve::riddle2(input_file.to_string())
+    );
+    print_separator();
 }
