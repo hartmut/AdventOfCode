@@ -52,7 +52,7 @@ fn main() {
      let input_file = "data/inputday04.txt";
      print_day_and_riddle(4, 1);
      println!(
-         "whats the winning board number? {:?}",
+         "whats the winning board score ? {:?}",
          days::day04::Solve::riddle1(input_file.to_string())
      );
     //  print_day_and_riddle(4, 2);

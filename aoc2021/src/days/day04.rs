@@ -13,7 +13,7 @@ impl Solve {
     // pub fn riddle2(riddlefile: String) -> usize {
     //     let riddle_text = common::readfile(riddlefile.to_string());
     //     let riddle_vector = make_vec_from_string(riddle_text);
-    //     calculate_gases(riddle_vector)
+    //     calculate2(riddle_vector)
     // }
 }
 
@@ -85,54 +85,119 @@ fn init_boards(riddle_string: String) -> Data {
         }
     }
     boards.push(board.clone());
-    println!("{:?}", boards);
-    println!("{:?}", draws);
     // output
     Data { draws, boards }
 }
 
-fn update_all_boards(boards: &mut Vec<Board>, value: usize) {
-// COMEBACK update all boards
+fn update_board_and_check(board: &mut Board, value: usize) -> bool {
+    // update a board
+    let mut done = false;
+    for row in 0..5 {
+        for line in 0..5 {
+            if board.numbers[row][line] == value {
+                board.marks[row][line] = true;
+                done = check_board_on_bingo(board, row, line);
+                break;
+            }
+        }
+        if done {
+            break;
+        };
+    }
+    done
+}
+
+fn check_board_on_bingo(board: &mut Board, rowin: usize, linein: usize) -> bool {
+    let mut checkrow = false;
+    let mut checkline = false;
+    for row in 0..5 {
+        checkline = board.marks[row][linein];
+        if !checkline {
+            break;
+        };
+    }
+    for line in 0..5 {
+        checkrow = board.marks[rowin][line];
+        if !checkrow {
+            break;
+        };
+    }
+
+    checkrow | checkline
+}
+
+fn calculate_board_value(board: &mut Board) -> usize {
+    let mut score = 0;
+    for row in 0..5 {
+        for line in 0..5 {
+            if !board.marks[row][line] {
+                score += board.numbers[row][line];
+            }
+        }
+    }
+    score
 }
 
 fn calculate(data: &mut Data) -> usize {
     let mut iter = data.draws.iter();
     let mut done = false;
-    let mut value: usize = 0;
-    let mut bingo_board = -1;
+    let mut score = 0;
 
-    while !done {
-        let draw = iter.next();
-        match draw {
-            None => {
-                done = true;
+    
+    // iterate over all draws and break if the last one gets you to a bingo
+    for draw in iter {
+        let mut found = false;
+        // iterate over all boards
+        for b in 0..data.boards.len() {
+            // check whether one board has a bingo
+            if update_board_and_check(&mut data.boards[b], *draw) {
+                score = calculate_board_value(&mut data.boards[b]) * draw;
+                found = true;
                 break;
             }
-            Some(value) => {
-                // iterate over all boards
-                update_all_boards(&mut data.boards, *value);
-                // check whether one board has a bingo
-                // break if yes and communicate bingo board number 
-            },
+        }
+        if found {
+            break;
+        };
+    }
+
+    score
+}
+
+fn calculate2(data: &mut Data) -> usize {
+    let mut iter = data.draws.iter();
+    let mut done = false;
+    let mut score = 0;
+    let mut lastboard = 0;
+    let mut lastdraw = 0;
+    
+    // iterate over all draws and break if the last one gets you to a bingo
+    for draw in iter {
+        // iterate over all boards
+        for b in 0..data.boards.len() {
+            // check whether one board has a bingo
+            if update_board_and_check(&mut data.boards[b], *draw) {
+                lastboard = b;
+                lastdraw = *draw;
+                break;
+            }
         }
     }
-    // calculate value for bingo Board using variable bingo_board
-
-    0
+    calculate_board_value(&mut data.boards[lastboard]) * lastdraw
 }
 
 #[test]
 fn riddle1() {
     let riddle_text = common::readfile("data/inputday04-test.txt".to_string());
-    let _riddle_vector = init_boards(riddle_text);
-    // let output = calculate(riddle_vector);
-    // assert_eq!(output, 198);
+    let mut riddle_vector = init_boards(riddle_text);
+    let output = calculate(&mut riddle_vector);
+    assert_eq!(output, 4512);
 }
 
 #[test]
 fn riddle2() {
     let riddle_text = common::readfile("data/inputday04-test.txt".to_string());
-    let _riddle_vector = init_boards(riddle_text);
-    // let output = calculate_gases(riddle_vector);
-    // assert_eq!(output, 230);
+    let mut riddle_vector = init_boards(riddle_text);
+    let output = calculate2(&mut riddle_vector);
+    assert_eq!(output, 1924);
 }
