@@ -47,4 +47,18 @@ fn main() {
         days::day03::Solve::riddle2(input_file.to_string())
     );
     print_separator();
+
+    // day 4
+    let input_file = "data/inputday04.txt";
+    print_day_and_riddle(4, 1);
+    println!(
+        "In how many assignment pairs does one range fully contain the other? {:?}",
+        days::day04::Solve::riddle1(input_file.to_string())
+    );
+    print_day_and_riddle(4, 1);
+    println!(
+        "In how many assignment pairs do the ranges overlap? {:?}",
+        days::day04::Solve::riddle2(input_file.to_string())
+    );
+    print_separator();
 }
