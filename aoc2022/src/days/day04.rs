@@ -1,4 +1,4 @@
-use super::common::{self, charvec_to_digit, match_to_usize};
+use super::common::{self, match_to_usize};
 
 #[derive(Debug)]
 struct SectionPair {
@@ -51,8 +51,8 @@ fn make_vec_from_string(riddle_string: String) -> PairVec {
 fn calculate(input: &mut PairVec) -> usize {
     let mut pairs: usize = 0;
     for pair in input.iter() {
-        if ((pair.elf2left >= pair.elf1left) && (pair.elf2right <= pair.elf1right)
-            || (pair.elf1left >= pair.elf2left) && (pair.elf1right <= pair.elf2right))
+        if (pair.elf2left >= pair.elf1left) && (pair.elf2right <= pair.elf1right)
+            || (pair.elf1left >= pair.elf2left) && (pair.elf1right <= pair.elf2right)
         {
             pairs += 1;
         };
@@ -64,15 +64,13 @@ fn calculate(input: &mut PairVec) -> usize {
 fn calculate2(input: &mut PairVec) -> usize {
     let mut pairs: usize = 0;
     for pair in input.iter() {
-        if ((pair.elf2left <= pair.elf1right ) && (pair.elf1left <= pair.elf2right))
-        {
+        if (pair.elf2left <= pair.elf1right) && (pair.elf1left <= pair.elf2right) {
             pairs += 1;
         };
     }
 
     pairs
 }
-
 
 #[test]
 fn riddle1() {
