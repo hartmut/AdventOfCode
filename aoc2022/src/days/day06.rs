@@ -1,4 +1,4 @@
-use super::common::{self, print_separator};
+use super::common::{self};
 
 pub struct Solve;
 

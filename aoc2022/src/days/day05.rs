@@ -70,9 +70,7 @@ fn make_riddle_data(riddle_string: String) -> RiddleData {
     // insert data into the stacks
     while inverse_stack.len() > 0 {
         let s = inverse_stack.pop().unwrap();
-        let mut left = "";
-        let mut right = "";
-        (left, right) = s.split_at(4);
+        let (mut left, mut right) = s.split_at(4);
         // iterate over every line and insert the values into the stacks
         for i in 0..c {
             let element = left.to_string();
@@ -106,7 +104,7 @@ fn make_riddle_data(riddle_string: String) -> RiddleData {
 
 fn calculate(input: &mut RiddleData) -> String {
     for iter in input.rules.iter() {
-        for i in 0..iter.count {
+        for _i in 0..iter.count {
             let mv = input.stacks[iter.start - 1].pop().unwrap();
             input.stacks[iter.to - 1].push(mv);
         }
@@ -123,7 +121,7 @@ fn calculate(input: &mut RiddleData) -> String {
 fn calculate2(input: &mut RiddleData) -> String {
     for iter in input.rules.iter() {
         let mut puffer: Vec<String> = vec![];
-        for i in 0..iter.count {
+        for _i in 0..iter.count {
             let mv = input.stacks[iter.start-1].pop().unwrap();
             puffer.push(mv);
         }
