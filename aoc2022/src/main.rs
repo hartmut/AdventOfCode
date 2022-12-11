@@ -82,4 +82,19 @@ fn main() {
         days::day05::Solve::riddle2(input_file.to_string())
     );
     print_separator();
+
+    // day 6
+    day += 1;
+    let input_file = "data/inputday06.txt";
+    print_day_and_riddle(day, 1);
+    println!(
+            "After the rearrangement procedure completes, what crate ends up on top of each stack? {:?}",
+            days::day06::Solve::riddle1(input_file.to_string())
+        );
+    print_day_and_riddle(day, 2);
+    println!(
+        "How many characters need to be processed before the first start-of-message marker is detected? {:?}",
+        days::day06::Solve::riddle2(input_file.to_string())
+    );
+    print_separator();
 }
