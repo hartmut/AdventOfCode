@@ -97,4 +97,19 @@ fn main() {
         days::day06::Solve::riddle2(input_file.to_string())
     );
     print_separator();
+
+    // day 7
+    day += 1;
+    let input_file = "data/inputday07.txt";
+    print_day_and_riddle(day, 1);
+    println!(
+                "After the rearrangement procedure completes, what crate ends up on top of each stack? {:?}",
+                days::day07::Solve::riddle1(input_file.to_string())
+            );
+    print_day_and_riddle(day, 2);
+    println!(
+            "What is the total size of the directory I need to delete to free up enough space? {:?}",
+            days::day07::Solve::riddle2(input_file.to_string())
+        );
+    print_separator();
 }
