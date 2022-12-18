@@ -4,7 +4,6 @@ use std::io::prelude::*;
 use std::io::BufReader;
 use std::path::Path;
 
-
 pub fn newreader(filename: String) -> BufReader<File> {
     let path = Path::new(&filename);
     let f = match File::open(&path) {
@@ -29,6 +28,9 @@ pub fn print_separator() {
 }
 
 pub fn print_day_and_riddle(day: u32, riddle: u32) {
+    if riddle == 1 {
+        print_separator();
+    };
     println!("we are on day {} and this is riddle {}", day, riddle);
 }
 
@@ -76,6 +78,16 @@ pub fn charvec_to_digit(charvec: Vec<char>) -> Vec<i64> {
     let mut outvec: Vec<i64> = vec![];
     for i in charvec.iter() {
         outvec.push(*i as i64);
-    };
+    }
     outvec
+}
+
+pub fn datafile(day: u32) -> String {
+    let mut output = "data/inputday".to_string();
+    if day < 10 {
+        output.push_str("0");
+    }
+    output.push_str(&day.to_string());
+    output.push_str(".txt");
+    output
 }
