@@ -2,8 +2,6 @@ mod days;
 
 use crate::days::common::*;
 
-// TODO build filename of inputfile from day and standardtext
-
 fn main() {
     let mut day = 1;
     println!("We need star fruits https://adventofcode.com/2022/");
@@ -115,7 +113,21 @@ fn main() {
     );
     print_day_and_riddle(day, 2);
     println!(
-            "What is the highest scenic score possible for any tree? {:?}",
-            days::day08::Solve::riddle2(input_file.to_string())
-        );
+        "What is the highest scenic score possible for any tree? {:?}",
+        days::day08::Solve::riddle2(input_file.to_string())
+    );
+
+    // day 9
+    day += 1;
+    let input_file = datafile(day);
+    print_day_and_riddle(day, 1);
+    println!(
+        "How many positions does the tail of the rope visit at least once? {:?}",
+        days::day09::Solve::riddle1(input_file.to_string())
+    );
+    print_day_and_riddle(day, 2);
+    println!(
+        "What is the highest scenic score possible for any tree? {:?}",
+        days::day09::Solve::riddle2(input_file.to_string())
+    );
 }
