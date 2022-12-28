@@ -127,7 +127,7 @@ fn main() {
     );
     print_day_and_riddle(day, 2);
     println!(
-        "What is the highest scenic score possible for any tree? {:?}",
+        "How many positions does the tail of the rope visit at least once? {:?}",
         days::day09::Solve::riddle2(input_file.to_string())
     );
 }

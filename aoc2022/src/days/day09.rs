@@ -65,69 +65,100 @@ fn make_riddle_data(riddle_string: String) -> RiddleData {
     output
 }
 
+fn step_knot(pos_head: &mut Pos, pos_tail: &mut Pos) {
+    if (pos_tail.x - 1) > pos_head.x {
+        pos_tail.x -= 1;
+        if pos_tail.y != pos_head.y {
+            pos_tail.y = pos_head.y;
+        }
+    };
+    if (pos_tail.x + 1) < pos_head.x {
+        pos_tail.x += 1;
+        if pos_tail.y != pos_head.y {
+            pos_tail.y = pos_head.y;
+        }
+    };
+    if (pos_tail.y - 1) > pos_head.y {
+        pos_tail.y -= 1;
+        if pos_tail.x != pos_head.x {
+            pos_tail.x = pos_head.x;
+        }
+    }
+    if (pos_tail.y + 1) < pos_head.y {
+        pos_tail.y += 1;
+        if pos_tail.x != pos_head.x {
+            pos_tail.x = pos_head.x;
+        }
+    };
+}
+
 fn calculate(input: &mut RiddleData) -> usize {
-    let mut score = 0;
     let mut visited: PosVisited = vec![];
-    let mut posHead = Pos { x: 0, y: 0 };
-    let mut posTail = Pos { x: 0, y: 0 };
+    let mut pos_head = Pos { x: 0, y: 0 };
+    let mut pos_tail = Pos { x: 0, y: 0 };
 
     // iterate over steps
     for c in input.iter() {
         // iterate over counts
         for _ in 0..c.count {
-            // println!("posTail: {:?}, posHead: {:?}, c: {:?}", posTail, posHead, c);
             match c.dir {
-                Direction::Right => posHead.x += 1,
-                Direction::Left => posHead.x += -1,
-                Direction::Up => posHead.y += 1,
-                Direction::Down => posHead.y -= 1,
+                Direction::Right => pos_head.x += 1,
+                Direction::Left => pos_head.x += -1,
+                Direction::Up => pos_head.y += 1,
+                Direction::Down => pos_head.y -= 1,
                 Direction::None => {}
             }
 
             // simulate Tail
-            if (posTail.x - 1) > posHead.x {
-                posTail.x -= 1;
-                if posTail.y != posHead.y {
-                    posTail.y = posHead.y;
-                }
-            };
-            if (posTail.x + 1) < posHead.x {
-                posTail.x += 1;
-                if posTail.y != posHead.y {
-                    posTail.y = posHead.y;
-                }
-            };
-            if (posTail.y - 1) > posHead.y {
-                posTail.y -= 1;
-                if posTail.x != posHead.x {
-                    posTail.x = posHead.x;
-                }
-            }
-            if (posTail.y + 1) < posHead.y {
-                posTail.y += 1;
-                if posTail.x != posHead.x {
-                    posTail.x = posHead.x;
-                }
-            };
-
-            // println!("posTail: {:?}, posHead: {:?}", posTail, posHead);
-
-            visited.push(posTail.clone());
+            step_knot(&mut pos_head, &mut pos_tail);
+            visited.push(pos_tail.clone());
         }
     }
 
-    // println!("presort  : {:?}", visited);
     visited.sort();
-    // println!("prededup : {:?}", visited);
     visited.dedup();
-    // println!("postdedup: {:?}", visited);
     visited.len()
 }
 
-fn calculate2(input: &mut RiddleData) -> usize {
-    let mut score = 0;
+fn step_rope(rope: &mut PosVisited) {
+    // loop over rope
+    for tail in 1..rope.len() {
+        let head = tail - 1;
+        if  (rope[head].x - rope[tail].x).abs() > 1 || (rope[head].y - rope[tail].y).abs() > 1 {
+            rope[tail].x += (rope[head].x - rope[tail].x).signum();
+            rope[tail].y += (rope[head].y - rope[tail].y).signum();
+        }
+    }
+}
 
-    score
+fn calculate2(input: &mut RiddleData) -> usize {
+    let mut visited: PosVisited = vec![];
+
+    // rope[0] is the head and rope[9] is the tail
+    let mut rope: PosVisited = vec![Pos { x: 0, y: 0 }; 10];
+
+    // iterate over steps
+    for c in input.iter() {
+        // iterate over counts
+        for _ in 0..c.count {
+            match c.dir {
+                Direction::Right => rope[0].x += 1,
+                Direction::Left => rope[0].x += -1,
+                Direction::Up => rope[0].y += 1,
+                Direction::Down => rope[0].y -= 1,
+                Direction::None => {}
+            }
+
+            // simulate Tail
+            step_rope(&mut rope);
+
+            visited.push(rope[rope.len() - 1].clone());
+        }
+    }
+
+    visited.sort();
+    visited.dedup();
+    visited.len()
 }
 
 #[test]
@@ -140,8 +171,8 @@ fn riddle1() {
 
 #[test]
 fn riddle2() {
-    let riddle_text = common::readfile("data/inputday09-testdata.txt".to_string());
+    let riddle_text = common::readfile("data/inputday09-testdata-b.txt".to_string());
     let mut riddledata = make_riddle_data(riddle_text);
     let output = calculate2(&mut riddledata);
-    assert_eq!(output, 1);
+    assert_eq!(output, 36);
 }
