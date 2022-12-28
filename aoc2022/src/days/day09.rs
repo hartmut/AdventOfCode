@@ -65,33 +65,6 @@ fn make_riddle_data(riddle_string: String) -> RiddleData {
     output
 }
 
-fn step_knot(pos_head: &mut Pos, pos_tail: &mut Pos) {
-    if (pos_tail.x - 1) > pos_head.x {
-        pos_tail.x -= 1;
-        if pos_tail.y != pos_head.y {
-            pos_tail.y = pos_head.y;
-        }
-    };
-    if (pos_tail.x + 1) < pos_head.x {
-        pos_tail.x += 1;
-        if pos_tail.y != pos_head.y {
-            pos_tail.y = pos_head.y;
-        }
-    };
-    if (pos_tail.y - 1) > pos_head.y {
-        pos_tail.y -= 1;
-        if pos_tail.x != pos_head.x {
-            pos_tail.x = pos_head.x;
-        }
-    }
-    if (pos_tail.y + 1) < pos_head.y {
-        pos_tail.y += 1;
-        if pos_tail.x != pos_head.x {
-            pos_tail.x = pos_head.x;
-        }
-    };
-}
-
 fn calculate(input: &mut RiddleData) -> usize {
     let mut visited: PosVisited = vec![];
     let mut pos_head = Pos { x: 0, y: 0 };
@@ -110,7 +83,11 @@ fn calculate(input: &mut RiddleData) -> usize {
             }
 
             // simulate Tail
-            step_knot(&mut pos_head, &mut pos_tail);
+            if  (pos_head.x - pos_tail.x).abs() > 1 || (pos_head.y - pos_tail.y).abs() > 1 {
+                pos_tail.x += (pos_head.x - pos_tail.x).signum();
+                pos_tail.y += (pos_head.y - pos_tail.y).signum();
+            }
+
             visited.push(pos_tail.clone());
         }
     }
