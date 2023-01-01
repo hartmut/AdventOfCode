@@ -83,7 +83,7 @@ fn calculate(input: &mut RiddleData) -> usize {
             }
 
             // simulate Tail
-            if  (pos_head.x - pos_tail.x).abs() > 1 || (pos_head.y - pos_tail.y).abs() > 1 {
+            if (pos_head.x - pos_tail.x).abs() > 1 || (pos_head.y - pos_tail.y).abs() > 1 {
                 pos_tail.x += (pos_head.x - pos_tail.x).signum();
                 pos_tail.y += (pos_head.y - pos_tail.y).signum();
             }
@@ -101,7 +101,7 @@ fn step_rope(rope: &mut PosVisited) {
     // loop over rope
     for tail in 1..rope.len() {
         let head = tail - 1;
-        if  (rope[head].x - rope[tail].x).abs() > 1 || (rope[head].y - rope[tail].y).abs() > 1 {
+        if (rope[head].x - rope[tail].x).abs() > 1 || (rope[head].y - rope[tail].y).abs() > 1 {
             rope[tail].x += (rope[head].x - rope[tail].x).signum();
             rope[tail].y += (rope[head].y - rope[tail].y).signum();
         }
